@@ -21,4 +21,5 @@ from players.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
+    path('index/', index),
 ]
