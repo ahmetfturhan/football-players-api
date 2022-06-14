@@ -23,7 +23,7 @@ def viewPlayer(request, player_id: int):
         player = Player.objects.get(pk=player_id)
         return 200, player
     except Player.DoesNotExist as e:
-        return 404, {"message":"Player you are looking for does not exist."}
+        return 404, {"message": "Player you are looking for does not exist."}
 
 
 @api.get("/players/identifier/{identif}", response={200: PlayerSchema, 404: NotFoundSchema})
@@ -32,9 +32,24 @@ def viewPlayer(request, identif: int):
         player = Player.objects.get(identifier=identif)
         return 200, player
     except Player.DoesNotExist as e:
-        return 404, {"message":"Player you are looking for does not exist."}
+        return 404, {"message": "Player you are looking for does not exist."}
 
-@api.post("/players", response={201:PlayerSchema})
-def createPlayer(request, newPlayer:PlayerSchema):
+
+@api.post("/players", response={201: PlayerSchema})
+def createPlayer(request, newPlayer: PlayerSchema):
     newPlayer = Player.objects.create(**newPlayer.dict())
     return newPlayer
+
+
+@api.put("/player/{player_id}", response={200: PlayerSchema, 404: NotFoundSchema})
+def updatePlayer(request, player_id: int, data: PlayerSchema):
+    try:
+        player = Player.objects.get(pk=player_id)
+        for attr, value in data.dict().items():
+            setattr(player, attr, value)
+        player.save()
+        return 200, player
+    except Player.DoesNotExist as e:
+        return 404, {"message": "Player you are looking for does not exist."}
+
+
