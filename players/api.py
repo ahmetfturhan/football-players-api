@@ -25,10 +25,10 @@ def viewPlayer(request, player_id: int):
         return 404, {"message", "Player you are looking for does not exist."}
 
 
-@api.get("/players/identifier/{identif}", response={200: List[PlayerSchema], 404: NotFoundSchema})
+@api.get("/players/identifier/{identif}", response={200: PlayerSchema, 404: NotFoundSchema})
 def viewPlayer(request, identif: int):
     try:
-        player = Player.objects.filter(identifier=identif)
+        player = Player.objects.get(identifier=identif)
         return 200, player
     except Player.DoesNotExist as e:
-        return 404, {"message", "Player you are looking for does not exist."}
+        return 404, {"message":"Player you are looking for does not exist."}
