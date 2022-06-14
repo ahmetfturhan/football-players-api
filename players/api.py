@@ -53,3 +53,11 @@ def updatePlayer(request, player_id: int, data: PlayerSchema):
         return 404, {"message": "Player you are looking for does not exist."}
 
 
+@api.delete("/player/{player_id}", response={200: int, 404: NotFoundSchema})
+def deletePlayer(request, player_id: int):
+    try:
+        player = Player.objects.get(pk=player_id)
+        player.delete()
+        return 200, player_id
+    except Player.DoesNotExist as e:
+        return 404, {"message": "Player you are looking for does not exist."}
