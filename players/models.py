@@ -16,6 +16,7 @@ class Player(models.Model):
         auto_now=True, blank=True)
 
     '''
+    "identifier": 12345,
     "first_name": "Hector",
         "last_name": "Bellerin",
         "team": "Arsenal",
