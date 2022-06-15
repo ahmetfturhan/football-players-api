@@ -28,7 +28,7 @@ Simple API to Create, Retrieve, Update, Delete football players data using Djang
 # Deleting a Player
 ``` Send a DELETE request to http://127.0.0.1:8000/api/players/{player_id} ```
 
-#JSON Format for Updating and Creating Players
+# JSON Format for Updating and Creating Players
 ```
 {
   "identifier": 0,
