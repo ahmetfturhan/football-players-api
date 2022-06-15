@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand
 
 from players.models import Player
 
+
 class Command(BaseCommand):
     help = 'Create tracks from JSON file'
 
@@ -17,7 +18,7 @@ class Command(BaseCommand):
         # load the datafile
         with open(datafile, 'r') as f:
             data = json.load(f)
-        
+
         # convert list of dictionaries to list of Track models, and bulk_create
         players = [Player(**player) for player in data]
 

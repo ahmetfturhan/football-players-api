@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 
+from pydantic import Required
+
 # Player model for players.
 
 
@@ -11,11 +13,16 @@ class Player(models.Model):
     team = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     image = models.CharField(max_length=200)
-
     created_at = models.DateTimeField(
         auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(
         auto_now=True, blank=True)
+
+# class PlayerDB(PlayerIn):
+#     created_at = models.DateTimeField(
+#         auto_now_add=True, blank=True)
+#     updated_at = models.DateTimeField(
+#         auto_now=True, blank=True)
 
     '''
     "identifier": 12345,
