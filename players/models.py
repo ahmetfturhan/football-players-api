@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 
+# Player model for players.
+
 
 class Player(models.Model):
     identifier = models.IntegerField()
