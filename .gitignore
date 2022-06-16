@@ -1,2 +1,6 @@
 # .gitignore
 venv
+*.pyc
+/footballApp/players/__pycache__/
+footballApp/__pycache__
+.vscode

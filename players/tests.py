@@ -13,18 +13,14 @@ class PlayerTestCase(TestCase):
                               last_name="Demir",
                               team="Fenerbahce",
                               position="Defender",
-                              image="ulaserendemir.jpg",
-                              created_at="2022-06-14 15:15:15",
-                              updated_at="2022-06-14 15:15:15")
+                              image="ulaserendemir.jpg")
 
         Player.objects.create(identifier=3434,
                               first_name="Furkan",
                               last_name="Ertas",
                               team="Fenerbahce",
                               position="Midfielder",
-                              image="furkanertas.jpg",
-                              created_at="2022-06-14 15:15:15",
-                              updated_at="2022-06-14 15:15:15")
+                              image="furkanertas.jpg")
 
         self.client = Client()  # Initialize the client
 
@@ -48,7 +44,7 @@ class PlayerTestCase(TestCase):
 
         # if the response equals to the mock data, test case is passed.
         self.assertEqual(response.json()[0], {'identifier': 3030, 'first_name': "Ulas Eren", 'last_name': 'Demir', 'team': 'Fenerbahce',
-                         'position': 'Defender', 'image': 'ulaserendemir.jpg', 'created_at': '2022-06-14', 'updated_at': '2022-06-14'})
+                         'position': 'Defender', 'image': 'ulaserendemir.jpg'})
 
     # a test case for cases that player does not exist
     def test_get_player_not_found(self):
@@ -67,14 +63,13 @@ class PlayerTestCase(TestCase):
 
         response.json()['created_at'] = editCreatedAt  # update the datetime
         response.json()['updated_at'] = editUpdatedAt
-        self.assertEqual(response.json(), {'identifier': 3030, 'first_name': "Ulas Eren", 'last_name': 'Demir', 'team': 'Fenerbahce',
-                         'position': 'Defender', 'image': 'ulaserendemir.jpg', 'created_at': '2022-06-14', 'updated_at': '2022-06-14'})
+        self.assertEqual(response.json(), {'identifier': 3030, 'first_name': "Ulas Eren", 'last_name': 'Demir', 'team': 'Fenerbahce','position': 'Defender', 'image': 'ulaserendemir.jpg'})
 
     # a test case for creating a player.
     def test_create_player(self):
         # send a request along with a JSON data.
         response = self.client.post('/api/players', data=json.dumps({"identifier": 2222, "first_name": "Kylian", "last_name": "Mbappe", "team": "Tottenham Hotspur",
-                                                                     "position": "Forward", "image": "kylianmbappe.jpg", "created_at": "2022-06-14T06:03:07.777Z", "updated_at": "2022-06-14T06:03:07.777Z"}), content_type="application/json")
+                                                                     "position": "Forward", "image": "kylianmbappe.jpg"}), content_type="application/json")
         # if the response code is 201, pass
         self.assertEqual(response.status_code, 201)
 

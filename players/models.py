@@ -18,12 +18,6 @@ class Player(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, blank=True)
 
-# class PlayerDB(PlayerIn):
-#     created_at = models.DateTimeField(
-#         auto_now_add=True, blank=True)
-#     updated_at = models.DateTimeField(
-#         auto_now=True, blank=True)
-
     '''
     "identifier": 12345,
     "first_name": "Hector",
