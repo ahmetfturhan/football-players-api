@@ -20,7 +20,7 @@ Simple API to Create, Retrieve, Update, Delete football players data using Djang
 ``` http://127.0.0.1:8000/api/players/identifier/{insert_identifier_here_and_delete_curly_brackets} ```
 
 # Creating a Player
-``` Send a POST request to http://127.0.0.1:8000/api/players along with a JSON data. You can see the JSON format at docs.```
+``` Send a POST request to http://127.0.0.1:8000/api/players along with a JSON data. You can see the JSON format at docs(or below).```
 
 # Updating a Player
 ``` Send a PUT request to http://127.0.0.1:8000/api/players/{player_id} along with a JSON data. ```
@@ -28,6 +28,18 @@ Simple API to Create, Retrieve, Update, Delete football players data using Djang
 # Deleting a Player
 ``` Send a DELETE request to http://127.0.0.1:8000/api/players/{player_id} ```
 
-#Further explanation and more endpoints can be see here
+# JSON Format for Updating and Creating Players
+```
+{
+  "identifier": 0,
+  "first_name": "string",
+  "last_name": "string",
+  "team": "string",
+  "position": "string",
+  "image": "string"
+}
+```
+
+# Further explanation and more endpoints can be see here
 ``` http://127.0.0.1:8000/api/docs ```
 
