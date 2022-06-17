@@ -4,3 +4,4 @@ venv
 /footballApp/players/__pycache__/
 footballApp/__pycache__
 .vscode
+players/__pycache__/

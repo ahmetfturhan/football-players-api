@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from players.api import api
-from players.views import index
+from players.views import index, playerDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
     path('index/', index),  # go to index page
+    path('playerDetail/', playerDetail),  # go to player detail page
 ]

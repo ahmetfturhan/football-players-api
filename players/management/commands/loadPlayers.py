@@ -8,7 +8,7 @@ from players.models import Player
 
 
 class Command(BaseCommand):
-    help = 'Create tracks from JSON file'
+    help = 'Create players from JSON file'
 
     def handle(self, *args, **kwargs):
         # set the path to the datafile
@@ -19,7 +19,7 @@ class Command(BaseCommand):
         with open(datafile, 'r') as f:
             data = json.load(f)
 
-        # convert list of dictionaries to list of Track models, and bulk_create
+        # convert list of dictionaries to list of Player models, and bulk_create
         players = [Player(**player) for player in data]
 
         Player.objects.bulk_create(players)

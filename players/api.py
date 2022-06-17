@@ -1,5 +1,6 @@
 from ast import Str
 from email import message
+import json
 from typing import List, Optional
 from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, File
@@ -9,7 +10,8 @@ from requests import request
 from players.models import Player
 from players.schema import PlayerInSchema, PlayerOutSchema, NotFoundSchema
 from players import services
-
+from django.http import JsonResponse
+from players.views import playerDetail
 
 api = NinjaAPI()
 
@@ -24,13 +26,16 @@ def get_players(request):
 # Returns 404 along with a NotFoundSchema if the player does not exist.
 @api.get("/players/{player_id}", response={200: PlayerOutSchema, 404: NotFoundSchema})
 def view_player(request, player_id: int):
-    return services.viewPlayer(request, player_id)
+    #playerObject = services.viewPlayer(request, player_id)
+    return playerDetail(request, player_id) 
 
 
 # Retrieve the player based on identifier.
-@api.get("/players/identifier/{identif}", response={200: PlayerOutSchema, 404: NotFoundSchema})
+@api.get("/players/identifier/{identif}")
 def view_player_with_identifier(request, identif: int):
-    return services.viewPlayerWIdentifier(request, identif)
+    returnValue = services.viewPlayerWIdentifier(request, identif)
+
+    return returnValue
 
 
 # Create a player along with a JSON data.

@@ -1,5 +1,6 @@
 from ast import Str
 from email import message
+from telnetlib import PRAGMA_HEARTBEAT
 from typing import List, Optional
 from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, File
@@ -8,9 +9,13 @@ from typing import List
 from requests import request
 from players.models import Player
 from players.schema import PlayerInSchema, PlayerOutSchema, NotFoundSchema
+from django.core import serializers
+from django.http import JsonResponse
+from django.http import HttpResponse
 
 def getPlayers(request):
     return Player.objects.all()
+
 
 def viewPlayer(request, player_id: int):
     try:
@@ -20,17 +25,29 @@ def viewPlayer(request, player_id: int):
     except Player.DoesNotExist as e:
         return 404, {"message": "Player you are looking for does not exist."}
 
+
 def viewPlayerWIdentifier(request, identif: int):
     try:
-        player = Player.objects.get(identifier=identif)
-        return 200, player
+        player = Player.objects.filter(identifier=identif)
+        
+        # playerList = []
+        # for PlayerObject in player:
+        #     playerList.append(PlayerObject)
+        # # print("sadenemeeeeeeee", playerList)
+        serializedPlayer = serializers.serialize('json', player)
+        # JsonResponse(serializedPlayer, safe=False)
+        # serializedPlayer = serializedPlayer[1:-1]
+        # print("sadasdfasdasdasdas",serializedPlayer)
+        return 200,JsonResponse(player, safe=False)
     except Player.DoesNotExist as e:
         return 404, {"message": "Player you are looking for does not exist."}
+
 
 def createPlayer(request, newPlayer: PlayerInSchema):
     # create the player using the JSON data.
     newPlayer = Player.objects.create(**newPlayer.dict())
     return newPlayer
+
 
 def updatePlayer(request, player_id: int, data: PlayerInSchema):
     try:
@@ -42,6 +59,7 @@ def updatePlayer(request, player_id: int, data: PlayerInSchema):
         return 200, player
     except Player.DoesNotExist as e:
         return 404, {"message": "Player you are looking for does not exist."}
+
 
 def deletePlayer(request, player_id: int):
     try:
